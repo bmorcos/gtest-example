@@ -4,10 +4,24 @@ This is a simple example repo illustrating how to use GTest to test C++ code. As
 a demonstration I use a simple class that holds two values and can perform
 addition, multiplication, subtraction, and division of said values.
 
-TODO:
-- A little info about GTest
-- Point to GTest resources
-- Not an exhaustive demo, e.g. global setup/teardown
+GTest
+([googletest](https://github.com/google/googletest/tree/master/googletest)) is a
+cross-platform testing framework developed by Google to facilitate all sorts of
+testing for C++. The provided documentation
+([primer](https://github.com/google/googletest/blob/master/googletest/docs/primer.md),
+[advanced](https://github.com/google/googletest/blob/master/googletest/docs/advanced.md))
+for the framework is quite detailed and easy to follow and furthermore, it is
+used enough that you can find additional solutions from external resources such
+as [stack overflow](https://stackoverflow.com/) (when was the last time you hit
+the SO landing page?).
+
+Note that this is not an exhaustive example, there are many additional features
+from GTest not show here. For example:
+- global test suite SetUp and TearDown
+- multithreaded testing
+- typed tests (similar to parametric tests, designed for templates)
+- exception/failure testing
+- etc.
 
 
 ## Requirements
@@ -22,6 +36,18 @@ setup.
 We use GCC (specifically ``g++``) to build the C source code. This is likely
 already installed, but if not it is easy to install with ``sudo apt install
 g++``.
+
+
+### gcov
+
+We use the ``gcov`` utility to generate the coverage reports. This is included
+with GCC so no extra installation is required.
+
+
+### lcov
+
+For human readable HTML reports we use the ``lcov`` utility on top of the
+standard ``gcov``. Install with ``sudo apt install lcov``.
 
 
 ### CMake
@@ -93,10 +119,78 @@ For example, from the root directory:
 rm -r _build
 ```
 
+It is possible to run coverage manually, but it is somewhat tedious. Take a look
+at the details in the _Script_ section below as well as the script itself for a
+some more information.
 
-### Scripts
 
-TODO (probably with gcov)
+### Script
+
+There is a ``build_run.sh`` script which builds and runs all tests. After
+running tests, a summary of the functional tests (pass/fail) and code coverage
+is printed at the end of the script:
+
+```
+./build_run.sh
+```
+
+
+#### HTML reports
+
+If we include the ``-report`` switch with the script, it will also generate HTML
+reports using ``lcov`` and drop the HTML files in the ``BUILD_DIR`` directory
+as ``<exe name>-html`` (e.g. ``runTests-html``).
+
+```
+./build_run.sh -report
+```
+
+View the reports by opening the appropriate ``<exe name>-html/index.html`` in
+your browser.
+
+
+#### Clean
+
+The script can also accept a ``-clean`` flag to remove any generated files. If
+the clean flag is provided, all other flags are ignored and the script will only
+execute the cleaning portion of the code, nothing else.
+
+```
+./build_run.sh -clean
+```
+
+
+#### Details
+
+The script creates an out-of-source directory in which to build and run tests,
+as this is much easier to cleanup since ``cmake`` does not provide any _clean_
+logic. Inside that directory (``BUILD_DIR``), the tests are built using
+``cmake`` followed by ``make``. Next, each of the test executables is run and
+it's pass/fail status logged in the ``EXE`` array. If you are manually checking
+a specific tests, you can easily run ``make <exe name>`` (after running ``cmake
+..`` in the ``BUILD_DIR``), to build the single executable.
+
+Code coverage info is stored in the same directory as the compiled object files.
+Each test has it's build files (and coverage files) in
+``$BUILD_DIR/CMakeFiles/<exe name>.dir`` (e.g.
+``_test-build/CmakeFiles/runTests.dir``). We move into the respective object
+directories, and run ``gcov`` to print the simple text coverage reports to the
+terminal. This command is piped into a series of ``awk`` commands which extract
+the coverage for our ``easy_math.cpp`` implementation. The coverage value is
+logged in the ``COV`` array. Coverage can be inspected manually by running the
+``gcov *.gcno`` command in the appropriate object directory.
+
+Next a summary is printed, pulling results logged in the ``EXE`` and ``COV``
+arrays.
+
+If the ``-report`` flag is set, the script will re-enter the object directories
+(``$BUILD_DIR/CMakeFiles/<exe name>.dir``) and run ``lcov`` and ``genhtml`` to
+create the human readable HTML reports. This can similarly be done manually for
+individual tests by entering the appropriate object directory and running ``lcov
+--capture --directory . --output-file <exe name>.info`` to grab the ``gcov``
+info (note, ``gcov`` must be run prior to ``lcov``). Then run ``genhtml <exe
+name>.info --output-directory <exe name>-html`` to create the HTML to be opened
+in the browser.
 
 
 ## Test Suites
@@ -194,10 +288,8 @@ by using the ``Combine`` wrapper.
 
 
 ## TODO
-- Typed tests (sweep template dtype)
 - Add some functional tests
     - Mock things with FFF
-- Add gcov/lcov
 - Add clang-format/cppcheck/cpplint
     - pre-commit?
-- Build/run scripts (probably with gcov)
+- Add back templating and run TYPED_TEST

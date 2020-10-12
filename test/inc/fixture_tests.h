@@ -5,8 +5,6 @@
 #include <iostream>
 #include "test/inc/common.h"
 
-typedef float DTYPE;
-
 using ::testing::Test; // GTest test fixture
 
 /* Inherit GTest base test fixture and create our own fixture
@@ -15,8 +13,8 @@ class MathsTest : public Test {
  protected:
   // Declare some member variables local to each test case
   int counter;
-  DTYPE a, b;
-  EasyMaths<DTYPE>* maths;
+  float a, b;
+  EasyMaths* maths;
 
   // GTest runs this before any test code
   void SetUp() override {
@@ -24,7 +22,7 @@ class MathsTest : public Test {
     counter = 0;
     a = 5.;
     b = 2.;
-    maths = new EasyMaths<DTYPE>(a, b, &counter);
+    maths = new EasyMaths(a, b, &counter);
   }
 
   // GTest runs after all test code

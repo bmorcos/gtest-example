@@ -13,12 +13,12 @@ TEST(SimpleTests, TestConstructor) {
   int n_instances = 0;
 
   // We expect our class constructor to increment the n_instances counter
-  EasyMaths<int> maths0(1, 1, &n_instances);
+  EasyMaths maths0(1, 1, &n_instances);
   EXPECT_EQ(1, n_instances)
       << ERR_PREFIX << "Constructor failed to increment counter!";
 
   // Try a second instance to see if it holds up
-  EasyMaths<int> maths1(1, 1, &n_instances);
+  EasyMaths maths1(1, 1, &n_instances);
   EXPECT_EQ(2, n_instances)
       << ERR_PREFIX << "Constructor failed to increment counter!";
 }
@@ -28,8 +28,8 @@ TEST(SimpleTests, TestConstructor) {
 TEST(SimpleTests, TestDestructor) {
   int n_instances;
 
-  EasyMaths<int> maths0(1, 1, &n_instances);
-  EasyMaths<int> maths1(1, 1, &n_instances);
+  EasyMaths maths0(1, 1, &n_instances);
+  EasyMaths maths1(1, 1, &n_instances);
   n_instances = 2;  // Set expectation so we don't rely on constructor
 
   // Check if the destructor decrements the counter

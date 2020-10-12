@@ -44,8 +44,8 @@ TEST_P(SweepTest, TestMult) {
  *****************************************************************************/
 // Explicitly list test cases using `Values`. This is 2 sets of params
 INSTANTIATE_TEST_CASE_P(SelectValues, SweepTest,
-                        Values(std::tuple<DTYPE, DTYPE> {1., 2.},
-                               std::tuple <DTYPE, DTYPE> {-1., -2.}));
+                        Values(std::tuple<float, float> {1., 2.},
+                               std::tuple <float, float> {-1., -2.}));
 
 // Use `Combine` to generate all param combinations. This is 9 sets of params
 INSTANTIATE_TEST_CASE_P(ComboValues, SweepTest,

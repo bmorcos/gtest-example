@@ -6,8 +6,6 @@
 #include <iostream>
 #include "test/inc/common.h"
 
-typedef float DTYPE;
-
 using ::testing::TestWithParam;  // GTest parametric test fixture
 
 /* Inherit GTest parametric test fixture
@@ -17,12 +15,12 @@ using ::testing::TestWithParam;  // GTest parametric test fixture
  *
  * Params: a, b
  *****************************************************************************/
-class SweepTest : public TestWithParam<std::tuple<DTYPE, DTYPE>> {
+class SweepTest : public TestWithParam<std::tuple<float, float>> {
  protected:
   // Declare some member variables local to each test case
   int counter;
-  DTYPE a, b;
-  EasyMaths<DTYPE>* maths;
+  float a, b;
+  EasyMaths* maths;
 
   // GTest runs this before any test code
   void SetUp() override {
@@ -31,7 +29,7 @@ class SweepTest : public TestWithParam<std::tuple<DTYPE, DTYPE>> {
     // `GetParam()` fetches the parameter, then we unpack the tuple
     a = std::get<0>(GetParam());
     b = std::get<1>(GetParam());
-    maths = new EasyMaths<DTYPE>(a, b, &counter);
+    maths = new EasyMaths(a, b, &counter);
   }
 
   // GTest runs after all test code

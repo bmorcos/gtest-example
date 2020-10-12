@@ -10,7 +10,7 @@
 TEST(FailingTests, TestNonFatal) {
   bool pass = false;
   EXPECT_TRUE(pass) << ERR_PREFIX << "Expected non-fatal failure!";
-  std::cout << NOTE_PREFIX << "This line is still executed!" << std::endl;
+  EXPECT_TRUE(pass) << ERR_PREFIX << "A second failure!";
 }
 
 /* Demonstrate fatal failure
@@ -20,6 +20,6 @@ TEST(FailingTests, TestNonFatal) {
 TEST(FailingTests, TestFatal) {
   bool pass = false;
   ASSERT_TRUE(pass) << ERR_PREFIX << "Expected fatal failure!";
-  std::cout << NOTE_PREFIX << "This line will not be executed!" << std::endl;
+  EXPECT_TRUE(pass) << ERR_PREFIX << "A second failure won't be shown!";
 }
 
