@@ -14,13 +14,13 @@ TEST(SimpleTests, TestConstructor) {
 
   // We expect our class constructor to increment the n_instances counter
   EasyMaths maths0(1, 1, &n_instances);
-  EXPECT_EQ(1, n_instances)
-      << ERR_PREFIX << "Constructor failed to increment counter!";
+  EXPECT_EQ(1, n_instances) << ERR_PREFIX
+                            << "Constructor failed to increment counter!";
 
   // Try a second instance to see if it holds up
   EasyMaths maths1(1, 1, &n_instances);
-  EXPECT_EQ(2, n_instances)
-      << ERR_PREFIX << "Constructor failed to increment counter!";
+  EXPECT_EQ(2, n_instances) << ERR_PREFIX
+                            << "Constructor failed to increment counter!";
 }
 
 /* Test the EasyMaths destructor correctly sets an external instance counter
@@ -35,6 +35,6 @@ TEST(SimpleTests, TestDestructor) {
   // Check if the destructor decrements the counter
   maths0.~EasyMaths();
   maths1.~EasyMaths();
-  EXPECT_EQ(0, n_instances)
-      << ERR_PREFIX << "Destructor failed to decrement counter!";
+  EXPECT_EQ(0, n_instances) << ERR_PREFIX
+                            << "Destructor failed to decrement counter!";
 }

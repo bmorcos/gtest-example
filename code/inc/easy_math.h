@@ -1,5 +1,5 @@
-#ifndef CODE_INC_EASY_MATH_H
-#define CODE_INC_EASY_MATH_H
+#ifndef CODE_INC_EASY_MATH_H_
+#define CODE_INC_EASY_MATH_H_
 
 // Simple class to hold values and do basic maths
 class EasyMaths {
@@ -11,7 +11,7 @@ class EasyMaths {
   float div();
 
   EasyMaths(float _a, float _b, int* _counter);  // Constructor
-  ~EasyMaths();  // Destructor
+  ~EasyMaths();                                  // Destructor
 
  private:
   float a;
@@ -19,4 +19,4 @@ class EasyMaths {
   int* counter;  // External counter (tracking num class isntances)
 };
 
-#endif  // CODE_INC_EASY_MATH_H
+#endif  // CODE_INC_EASY_MATH_H_

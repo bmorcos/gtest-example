@@ -11,59 +11,59 @@
 /* Test the `add` method
  *****************************************************************************/
 TEST_F(MathsTest, TestAdd) {
-    std::cout << NOTE_PREFIX << "Testing..." << std::endl;
+  std::cout << NOTE_PREFIX << "Testing..." << std::endl;
 
-    float result;
-    result = maths->add();
+  float result;
+  result = maths->add();
 
-    float expected = a + b;
+  float expected = a + b;
 
-    // Notice the 'FLOAT' designation in our check
-    EXPECT_FLOAT_EQ(expected, result)
-        << ERR_PREFIX << "Failed to add numbers correctly!";
+  // Notice the 'FLOAT' designation in our check
+  EXPECT_FLOAT_EQ(expected, result) << ERR_PREFIX
+                                    << "Failed to add numbers correctly!";
 }
 
 /* Test the `mult` method
  *****************************************************************************/
 TEST_F(MathsTest, TestMult) {
-    std::cout << NOTE_PREFIX << "Testing..." << std::endl;
+  std::cout << NOTE_PREFIX << "Testing..." << std::endl;
 
-    float result;
-    result = maths->mult();
+  float result;
+  result = maths->mult();
 
-    float expected = a * b;
+  float expected = a * b;
 
-    // Notice the 'FLOAT' designation in our check
-    EXPECT_FLOAT_EQ(expected, result)
-        << ERR_PREFIX << "Failed to multiply numbers correctly!";
+  // Notice the 'FLOAT' designation in our check
+  EXPECT_FLOAT_EQ(expected, result) << ERR_PREFIX
+                                    << "Failed to multiply numbers correctly!";
 }
 
 /* Test the `sub` method
  *****************************************************************************/
 TEST_F(MathsTest, TestSub) {
-    std::cout << NOTE_PREFIX << "Testing..." << std::endl;
+  std::cout << NOTE_PREFIX << "Testing..." << std::endl;
 
-    float result;
-    result = maths->sub();
+  float result;
+  result = maths->sub();
 
-    float expected = a - b;
+  float expected = a - b;
 
-    // Notice the 'FLOAT' designation in our check
-    EXPECT_FLOAT_EQ(expected, result)
-        << ERR_PREFIX << "Failed to subtract numbers correctly!";
+  // Notice the 'FLOAT' designation in our check
+  EXPECT_FLOAT_EQ(expected, result) << ERR_PREFIX
+                                    << "Failed to subtract numbers correctly!";
 }
 
 /* Test the `div` method
  *****************************************************************************/
 TEST_F(MathsTest, TestDiv) {
-    std::cout << NOTE_PREFIX << "Testing..." << std::endl;
+  std::cout << NOTE_PREFIX << "Testing..." << std::endl;
 
-    float result;
-    result = maths->div();
+  float result;
+  result = maths->div();
 
-    float expected = a / b;
+  float expected = a / b;
 
-    // Notice the 'FLOAT' designation in our check
-    EXPECT_FLOAT_EQ(expected, result)
-        << ERR_PREFIX << "Failed to divide numbers correctly!";
+  // Notice the 'FLOAT' designation in our check
+  EXPECT_FLOAT_EQ(expected, result) << ERR_PREFIX
+                                    << "Failed to divide numbers correctly!";
 }

@@ -1,9 +1,9 @@
 // Parametric test cases
-#ifndef TEST_INC_FIXTURE_TESTS_H_
-#define TEST_INC_FIXTURE_TESTS_H_
+#ifndef TEST_INC_PARAMETRIC_TESTS_H_
+#define TEST_INC_PARAMETRIC_TESTS_H_
 
-#include <tuple>
 #include <iostream>
+#include <tuple>
 #include "test/inc/common.h"
 
 using ::testing::TestWithParam;  // GTest parametric test fixture
@@ -33,9 +33,7 @@ class SweepTest : public TestWithParam<std::tuple<float, float>> {
   }
 
   // GTest runs after all test code
-  void TearDown() override {
-    delete maths;
-  }
+  void TearDown() override { delete maths; }
 };
 
-#endif  // TEST_INC_FIXTURE_TESTS_H_
+#endif  // TEST_INC_PARAMETRIC_TESTS_H_

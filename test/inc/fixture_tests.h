@@ -5,7 +5,7 @@
 #include <iostream>
 #include "test/inc/common.h"
 
-using ::testing::Test; // GTest test fixture
+using ::testing::Test;  // GTest test fixture
 
 /* Inherit GTest base test fixture and create our own fixture
  *****************************************************************************/

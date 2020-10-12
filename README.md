@@ -75,6 +75,27 @@ sudo make                  # Comnpile source
 sudo cp *.a /usr/lib       # Copy built libraries to lib dir
 ```
 
+
+### pre-comit (optional)
+
+This repo also demonstrates the use of C++ pre-commit hooks. First install the
+utilities themselves:
+
+- **clang-format**, for auto formatting the code:
+  ``sudo apt install clang-format``
+- **cpplint**, for code style: ``pip install cpplint``
+- **cppcheck**, for checking syntax: ``sudo apt install cppcheck``
+
+Next setup pre-commit itself
+
+1. Install pre-commit: ``pip install pre-commit``
+2. From the root directory of this repo, setup pre-commit:
+   ``pre-commit install --install-hooks``
+3. Run the hooks: ``pre-commit run --all-files``
+
+Any further commits will also trigger these utilities to run automatically.
+
+
 ## Usage
 
 ### Manually
@@ -289,7 +310,5 @@ by using the ``Combine`` wrapper.
 
 ## TODO
 - Add some functional tests
-    - Mock things with FFF
-- Add clang-format/cppcheck/cpplint
-    - pre-commit?
+    - Mock things with FFF (GMock can only do classes, not free functions)
 - Add back templating and run TYPED_TEST

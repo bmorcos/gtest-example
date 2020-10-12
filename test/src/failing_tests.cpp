@@ -22,4 +22,3 @@ TEST(FailingTests, TestFatal) {
   ASSERT_TRUE(pass) << ERR_PREFIX << "Expected fatal failure!";
   EXPECT_TRUE(pass) << ERR_PREFIX << "A second failure won't be shown!";
 }
-
